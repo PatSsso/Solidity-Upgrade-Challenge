@@ -1,0 +1,44 @@
+name: Linter + tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Solidity. Install dependencies
+        run: yarn install
+
+      - name: Solidity. Compile contracts
+        run: yarn compile
+
+      - name: Solidity. Solidity Lint
+        run: yarn lint:sol
+
+      - name: Solidity. JS Lint
+        run: yarn lint:ts
+
+      - name: Solidity. Prettier
+        run: yarn prettier
+
+      - name: Solidity. Unit tests
+        run: yarn test

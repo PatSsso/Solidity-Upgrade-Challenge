@@ -6,6 +6,8 @@ import { ethers } from 'ethers';
 import { HardhatUserConfig } from 'hardhat/types';
 import { HardhatNetworkForkingUserConfig } from 'hardhat/src/types/config';
 
+import './tasks';
+
 const {
   ALCHEMY_KEY_POLYGON,
   ALCHEMY_KEY_MUMBAI,
@@ -128,7 +130,7 @@ const config: HardhatUserConfig = {
   solidity: {
     compilers: [
       {
-        version: '0.8.19',
+        version: '0.8.10',
         settings: {
           optimizer: {
             enabled: true,
