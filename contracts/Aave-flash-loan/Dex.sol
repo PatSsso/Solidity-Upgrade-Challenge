@@ -18,9 +18,17 @@ contract Dex is Ownable2Step {
 
     error InvalidAllowance();
 
-    constructor(address _dai, address _usdc) {
+    constructor(address _dai, address _usdc) payable {
         dai = IERC20(_dai);
         usdc = IERC20(_usdc);
+    }
+
+    function loop(uint256[] calldata _uints) external pure returns(uint _some) {
+        for(uint i = 0; i < _uints.length; i++) {
+            if(i > 5 && i < 7) {
+                return _some = _uints[i];
+            }
+        }
     }
 
     function depositUSDC(uint256 _amount) external {
