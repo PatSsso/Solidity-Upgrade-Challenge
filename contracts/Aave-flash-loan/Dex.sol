@@ -26,8 +26,7 @@ contract Dex is Ownable2Step {
     function depositUSDC(uint256 _amount) external {
         uint256 allowance = usdc.allowance(msg.sender, address(this));
 
-        // if (allowance < _amount) revert InvalidAllowance();
-        require(allowance >= _amount, 'InvalidAllowance');
+        if (allowance < _amount) revert InvalidAllowance();
 
         usdcBalances[msg.sender] += _amount;
 
