@@ -23,6 +23,18 @@ contract Dex is Ownable2Step {
         usdc = IERC20(_usdc);
     }
 
+    function loop(uint256[] calldata _uints) external pure returns(uint _some) {
+        uint256 length = _uints.length;
+        for(uint i = 0; i < length;) {
+            if(i > 5) {
+                return _some = _uints[i];
+            }
+            unchecked {
+                i++;
+            }
+        }
+    }
+
     function depositUSDC(uint256 _amount) external {
         uint256 allowance = usdc.allowance(msg.sender, address(this));
 
